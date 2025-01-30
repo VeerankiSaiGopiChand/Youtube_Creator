@@ -6,7 +6,7 @@ const useChannelDetails = (channelId) => {
 
   useEffect(() => {
     fetchChannelImage();
-  }, []);
+  },);
 
   const fetchChannelImage = async () => {
     const data = await fetch(CHANNEL_INFO_API + "&id=" + channelId);

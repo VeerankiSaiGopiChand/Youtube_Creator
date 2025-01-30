@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { LOGO, YOUTUBE_SEARCH_API } from "../utils/constants";
@@ -14,32 +14,35 @@ const Head = () => {
 
     const dispatch = useDispatch();
 
-  
+    const getSearchSuggestions = useCallback(async () => {
+      const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+      const json = await data.json();
+      //console.log(json[1]);
+      setSuggestions(json[1]);
+      // update cache
+      dispatch(
+        cacheResults({
+          [searchQuery]: json[1],
+        })
+      );
+    }, [searchQuery, dispatch]);
+
     useEffect(() => {
         const timer = setTimeout(() => {
           if (searchCache[searchQuery]) {
             setSuggestions(searchCache[searchQuery]);
           } else {
-            getSearchSugsestions();
+            getSearchSuggestions();
           }
         }, 200);
         return () => {
           clearTimeout(timer);
         };
-      }, [searchQuery]);
+      }, [searchQuery, searchCache, getSearchSuggestions,]);
+
+     
       
-      const getSearchSugsestions = async () => {
-        const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-        const json = await data.json();
-        //console.log(json[1]);
-        setSuggestions(json[1]);
-        // update cache
-        dispatch(
-          cacheResults({
-            [searchQuery]: json[1],
-          })
-        );
-      };
+     
 
     const toggleMenuHandler = () => {
       dispatch(toggleMenu());
@@ -82,12 +85,12 @@ const Head = () => {
         {showSuggestions && (
           <div className="absolute top-12 bg-white py-2 px-2 w-2/3 shadow-lg rounded-lg border border-gray-200 z-10">
             <ul>
-              {suggestions.map((s) => (
+              {suggestions.map((item) => (
                 <li
-                  key={s}
+                  key={item}
                   className="py-2 px-3 shadow-sm hover:bg-gray-100 cursor-pointer"
                 >
-                  🔍 {s}
+                  🔍 {item}
                 </li>
               ))}
             </ul>

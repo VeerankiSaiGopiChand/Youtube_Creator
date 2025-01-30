@@ -23,23 +23,31 @@ const WatchPage = () => {
 
 
   return (
-    <div className="flex flex-col w-full bg-gray-100 min-h-screen">
-      <div className="px-5 flex flex-col lg:flex-row w-full gap-5">
-        <div className="flex-1 bg-black rounded-xl overflow-hidden shadow-md">
+    <div className="flex flex-col w-full bg-gray-50 min-h-screen">
+      {/* Video & Live Chat Section */}
+      <div className="px-5 flex flex-col lg:flex-row w-full gap-5 mt-5">
+        {/* Video Player */}
+        <div className="flex-1 bg-black rounded-xl overflow-hidden shadow-lg">
           <iframe
-            className="w-full h-[300px] lg:h-[600px]"
-            src={"https://www.youtube.com/embed/" + searchParams.get("v")}
+            className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-xl"
+            src={"https://www.youtube.com/embed/"+ searchParams.get("v")}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
         </div>
-        <div className="lg:w-1/3 bg-white rounded-xl shadow-md p-4">
+
+        {/* Live Chat Section */}
+        <div className="lg:w-1/3 bg-white rounded-xl shadow-md p-4 border border-gray-200">
+          <h2 className="text-lg font-bold text-gray-800 mb-2">Live Chat</h2>
           <LiveChat />
         </div>
       </div>
-      <div className="mt-5 px-5">
-      <CommentsContainer />
+
+      {/* Comments Section */}
+      <div className="mt-8 px-5">
+        <h2 className="text-xl font-bold text-gray-800 mb-4">Comments</h2>
+        <CommentsContainer />
       </div>
     </div>
   );

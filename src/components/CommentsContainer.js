@@ -1,45 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+
 const commentsData = [
   {
-    name: "Akshay Saini",
-    text: "Lorem ipsum dolor sit amet, consectetur adip",
+    name: "John Doe",
+    text: "This was an absolute game-changer! 🔥 Thanks for the amazing breakdown!",
     replies: [],
   },
   {
-    name: "Akshay Saini",
-    text: "Lorem ipsum dolor sit amet, consectetur adip",
+    name: "Sarah Smith",
+    text: "Loved the explanation! You make complex topics so simple. Subscribed! 🎉",
     replies: [
       {
-        name: "Akshay Saini",
-        text: "Lorem ipsum dolor sit amet, consectetur adip",
+        name: "Mark Watson",
+        text: "Totally agree! This guy is seriously underrated.",
         replies: [],
       },
       {
-        name: "Akshay Saini",
-        text: "Lorem ipsum dolor sit amet, consectetur adip",
+        name: "Emily Johnson",
+        text: "Same here! Best tutorial I've watched in a while. 👏",
         replies: [
           {
-            name: "Akshay Saini",
-            text: "Lorem ipsum dolor sit amet, consectetur adip",
+            name: "David Brown",
+            text: "Right? His explanations are crystal clear. 🤩",
             replies: [
               {
-                name: "Akshay Saini",
-                text: "Lorem ipsum dolor sit amet, consectetur adip",
+                name: "Chris Evans",
+                text: "Exactly! YouTube needs more content like this. 👍",
                 replies: [
                   {
-                    name: "Akshay Saini",
-                    text: "Lorem ipsum dolor sit amet, consectetur adip",
+                    name: "Mike Wilson",
+                    text: "If only school teachers explained stuff this well! 😂",
                     replies: [
-                      {
-                        name: "Akshay Saini",
-                        text: "Lorem ipsum dolor sit amet, consectetur adip",
-                        replies: [],
-                      },
+                      
                     ],
                   },
                   {
-                    name: "Akshay Saini",
-                    text: "Lorem ipsum dolor sit amet, consectetur adip",
+                    name: "Sophia Martinez",
+                    text: "The visuals and animations made it even better! 🎨",
                     replies: [],
                   },
                 ],
@@ -51,63 +48,68 @@ const commentsData = [
     ],
   },
   {
-    name: "Akshay Saini",
-    text: "Lorem ipsum dolor sit amet, consectetur adip",
+    name: "Alex Turner",
+    text: "Bro, your videos always save me before my exams. Huge respect! 🙌",
     replies: [],
   },
   {
-    name: "Akshay Saini",
-    text: "Lorem ipsum dolor sit amet, consectetur adip",
+    name: "Jessica Green",
+    text: "Never knew this concept could be so simple! Thanks a ton. ❤️",
     replies: [],
   },
   {
-    name: "Akshay Saini",
-    text: "Lorem ipsum dolor sit amet, consectetur adip",
-    replies: [],
-  },
-  {
-    name: "Akshay Saini",
-    text: "Lorem ipsum dolor sit amet, consectetur adip",
+    name: "Michael Scott",
+    text: "The way you structured the content was perfect. Keep up the great work! 💯",
     replies: [],
   },
 ];
-const Comment = ({ data }) => {
 
-  const { name, text } = data;
+const Comment = ({ name, text, replies }) => {
+  const [showReplies, setShowReplies] = useState(false); // State to toggle replies visibility
 
   return (
-    <div className="flex shadow-sm bg-gray-100 p-2 rounded-lg my-2">
+    <div className="flex items-start space-x-3 my-4 p-3 rounded-lg bg-gray-100 shadow-md">
       <img
-        className="w-12 h-12"
-        alt="user"
-        src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+        src={`https://i.pravatar.cc/40?u=${name}`}
+        alt={name}
+        className="w-10 h-10 rounded-full"
       />
-      <div className="px-3">
-        <p className="font-bold">{name}</p>
-        <p>{text}</p>
+      <div className="flex flex-col w-full">
+        <p className="font-medium text-gray-900">{name}</p>
+        <p className="text-gray-700 text-sm">{text}</p>
+
+        {/* Show/Hide Replies Button */}
+        {replies.length > 0 && (
+          <button
+            onClick={() => setShowReplies(!showReplies)}
+            className="text-blue-600 mt-2"
+          >
+            {showReplies ? "Hide Replies" : "Show Replies"}
+          </button>
+        )}
+
+        {/* Display Replies directly under each comment if showReplies is true */}
+        {showReplies && replies.length > 0 && (
+          <div className="ml-10 mt-2 border-l border-blue-300 pl-4">
+            {replies.map((reply, index) => (
+              <Comment key={index} {...reply} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
-const CommentsList = ({ comments }) => {
-  // Disclaimer: Don't use indexes as keys
-  return comments.map((comment, index) => (
-    <div key={index}>
-      <Comment data={comment} />
-      <div className="pl-5 border border-l-black ml-5">
-        <CommentsList comments={comment.replies} />
-      </div>
-    </div>
-  ));
-};
+
 const CommentsContainer = () => {
-    return (
-      <div className="m-5 p-5 bg-white rounded-xl shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Comments:</h1>
-        <CommentsList comments={commentsData} />
-      </div>
-    );
-  };
-  
-  export default CommentsContainer;
-  
+  return (
+    <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+      <h2 className="text-lg font-semibold text-gray-900 mb-4">Comments</h2>
+      {commentsData.map((comment, index) => (
+        <Comment key={index} {...comment} />
+      ))}
+    </div>
+  );
+};
+
+export default CommentsContainer;

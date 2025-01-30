@@ -18,22 +18,25 @@ const VideoCard = ({ info }) => {
     alt="thumbnail"
     src={thumbnails.medium.url}
   />
-   <div className="flex items-center gap-2">
-          <img
-            src={channelImage}
-            alt={channelTitle + " image"}
-            className="rounded-full w-10 h-10"
-          />
-          <li className="font-bold line-clamp-2">{title}</li>
-        </div>
-  <div className="flex mt-2">
-    
-    <div>
-      <p className="text-sm text-gray-600">{channelTitle}</p>
-      <p className="text-sm text-gray-600">{statistics.viewCount} views</p>
-    </div>
+  <div className="flex items-center gap-2 mt-2">
+    <img
+      src={channelImage}
+      alt={channelTitle + " image"}
+      className="rounded-full w-10 h-10"
+    />
+    <li className="font-bold line-clamp-2 text-gray-900">{title}</li>
+  </div>
+  <div className="mt-2">
+    <p className="text-sm font-semibold text-gray-800">{channelTitle}</p> 
+    <p className="text-xs text-gray-500 tracking-wide mt-1">
+      {Intl.NumberFormat("en-US", { notation: "compact" }).format(
+        statistics.viewCount
+      )}
+      {" Views •"}
+    </p>
   </div>
 </div>
+
 
   
   );
