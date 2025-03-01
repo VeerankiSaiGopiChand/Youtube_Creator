@@ -19,7 +19,7 @@ A state-of-the-art video streaming web app designed to redefine your video-watch
 
 Watch the demonstration video below to see the project in action:
 
-👉 **[Screen Shared Demo](#)** (Replace with actual demo link)
+https://github.com/user-attachments/assets/d24bd562-da9c-447b-805a-168529b17884
 
 ---
 
@@ -83,6 +83,6 @@ Contributions are welcome! Follow these steps to contribute:
 
 If you have any questions or want to collaborate, feel free to reach out!  
 📧 **Email**: gopichand4520@gmail.com  
-🔗 **LinkedIn**: [VeerankiSaiGopiChand]([https://linkedin.com/in/your-profile](https://www.linkedin.com/in/vsgopichand45/))  
+🔗 **LinkedIn**: [VeerankiSaiGopiChand](https://www.linkedin.com/in/vsgopichand45/)  
 🐙 **GitHub**: [VeerankiSaiGopiChand](https://github.com/VeerankiSaiGopiChand)
 
